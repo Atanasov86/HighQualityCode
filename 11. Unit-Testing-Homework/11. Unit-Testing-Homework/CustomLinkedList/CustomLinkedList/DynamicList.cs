@@ -1,33 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CustomLinkedList
+﻿namespace CustomLinkedList
 {
+    using System;
+
     /// <summary>Dynamic (linked) list class definition</summary>
     public class DynamicList<T>
     {
-        private class ListNode
-        {
-            public ListNode(T element)
-            {
-                this.Element = element;
-                this.NextNode = null;
-            }
-
-            public ListNode(T element, ListNode prevNode)
-            {
-                this.Element = element;
-                prevNode.NextNode = this;
-            }
-
-            public T Element { get; set; }
-
-            public ListNode NextNode { get; set; }
-        }
-
         private ListNode head;
         private ListNode tail;
         private int count;
@@ -170,7 +147,7 @@ namespace CustomLinkedList
             if (currentNode != null)
             {
                 // The element is found in the list -> remove it
-                RemoveListNode(currentNode, prevNode);
+                this.RemoveListNode(currentNode, prevNode);
                 return currentIndex;
             }
 
@@ -211,7 +188,7 @@ namespace CustomLinkedList
         /// </returns>
         public bool Contains(T item)
         {
-            int index = IndexOf(item);
+            int index = this.IndexOf(item);
             bool found = index != -1;
             return found;
         }
@@ -224,7 +201,7 @@ namespace CustomLinkedList
         private void RemoveListNode(ListNode node, ListNode prevNode)
         {
             this.count--;
-            if (count == 0)
+            if (this.count == 0)
             {
                 // The list becomes empty -> remove head and tail
                 this.head = null;
@@ -246,6 +223,25 @@ namespace CustomLinkedList
             {
                 this.tail = prevNode;
             }
+        }
+
+        private class ListNode
+        {
+            public ListNode(T element)
+            {
+                this.Element = element;
+                this.NextNode = null;
+            }
+
+            public ListNode(T element, ListNode prevNode)
+            {
+                this.Element = element;
+                prevNode.NextNode = this;
+            }
+
+            public T Element { get; set; }
+
+            public ListNode NextNode { get; set; }
         }
     }
 }
